@@ -1,0 +1,65 @@
+calculateGreenRouteService a owl:NamedIndividual ;
+	a core:Service ;
+	core:name "calculateGreenRoute"^^xsd:string ;
+	core:hasParameter [ 
+		a core:Parameter ;
+		core:name "start"^^xsd:string ;
+		core:mandatory "true"^^xsd:boolean ;
+		core:hasDatatype [      
+			a core:ComplexDatatype ;
+			core:basedOnClass core:WGS84Location ;
+			core:hasProperty [ 
+				a core:PrimitiveProperty
+				core:hasDatatype core:decimal ;
+				core:basedOnProperty geo:lat
+			] ;
+			core:hasProperty [ 
+				a core:PrimitiveProperty
+				core:hasDatatype core:decimal ;
+				core:basedOnProperty geo:long
+	]]] ;
+	core:hasParameter [ 
+		a core:Parameter ;
+		core:name "end"^^xsd:string ;
+		core:mandatory "true"^^xsd:boolean ;
+		core:hasDatatype [      
+			a core:ComplexDatatype ;
+			core:basedOnClass core:WGS84Location ;
+			core:hasProperty [ 
+				a core:PrimitiveProperty
+				core:hasDatatype core:decimal ;
+				core:basedOnProperty geo:lat
+			] ;
+			core:hasProperty [ 
+				a core:PrimitiveProperty
+				core:hasDatatype core:decimal ;
+				core:basedOnProperty geo:long
+	]]] ;
+	core:hasParameter [ 
+		a core:Parameter ;
+		core:name "MovementType" ;
+		core:mandatory "false"^^xsd:boolean ;
+		core:hasDatatype core:string ;
+		core:hasRestriction [ 
+			a core:InstanceOfRestriction ;
+			core:onlyInstancesOfClass bim-sm:MovementType ;
+			core:valueProperty core:name
+	]] ;
+	core:hasReturnType [ 
+		a core:ComplexDatatype ;
+		core:basedOnClass bim-sm:Waypoint ;
+		core:hasProperty [ 
+			a core:PrimitiveProperty
+			core:hasDatatype core:decimal ;
+			core:basedOnProperty geo:lat
+		] ;
+		core:hasProperty [ 
+			a core:PrimitiveProperty
+			core:hasDatatype core:decimal ;
+			core:basedOnProperty geo:long
+		] ;
+		core:hasProperty [ 
+			a core:PrimitiveProperty
+			core:hasDatatype core:string ;
+			core:basedOnProperty bim-sm:hint
+	]] .
